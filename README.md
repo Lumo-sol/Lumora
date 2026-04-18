@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./public/icon.svg" alt="Lumora logo" width="110" />
+  <img src="./public/logo.jpg" alt="Lumora logo" width="110" />
 </p>
 
 <h1 align="center">Lumora SOL Token MVP</h1>
@@ -38,13 +38,13 @@ This repository focuses on:
 - Website: [https://www.lumora.cfd](https://www.lumora.cfd)
 - GitHub Repository: [https://github.com/Lumo-sol/Lumora.git](https://github.com/Lumo-sol/Lumora.git)
 
-## SVG Logo Note
+## Brand Image Note
 
-The README uses an HTML `<img>` tag instead of Markdown image syntax so the SVG logo renders more reliably across GitHub viewers.
+The README uses an HTML `<img>` tag so the project brand image renders more reliably across GitHub viewers.
 
-If your GitHub renderer blocks SVG preview in a given context, open the asset directly:
+If the preview does not render in a specific client, open the asset directly:
 
-- [`public/icon.svg`](./public/icon.svg)
+- [`public/logo.jpg`](./public/logo.jpg)
 
 ## Features
 
@@ -310,7 +310,7 @@ Use `POST /api/config` with the admin password, or change `DEFAULT_CONTRACT_ADDR
 
 - Minimal but functional launch-ready structure
 - Clean English-only codebase and documentation
-- SVG logo support in README
+- Consistent brand image support in README
 - Lightweight API layer for MVP realism
 - Easy GitHub handoff and extension path
 
