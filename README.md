@@ -63,7 +63,7 @@ If the preview does not render in a specific client, open the asset directly:
 
 - `/api/config` for contract address delivery and lightweight admin updates
 - `/api/prices` for market context and fallback-safe token pricing
-- `/api/waitlist` for validated MVP waitlist submissions
+- `/api/waitlist` for validated MVP waitlist submissions with local persistence
 
 ## First-Principles MVP Scope
 
@@ -113,6 +113,8 @@ lib/
 public/
   icon.svg
   logo.jpg
+data/
+  .gitkeep
 ```
 
 ## Process Flow
@@ -225,6 +227,12 @@ Supported variables:
 - `DEFAULT_CONTRACT_ADDRESS`
   Sets the initial Solana contract address shown in the UI
 
+Important:
+
+- `ADMIN_PASSWORD` is required for write access to `/api/config`
+- Runtime config and waitlist data are persisted to local JSON files under `data/`
+- Runtime JSON files are local-only artifacts and are ignored by git
+
 ## API Reference
 
 ### `GET /api/config`
@@ -258,7 +266,7 @@ Returns the token panel data used by the metrics section.
 
 ### `GET /api/waitlist`
 
-Returns the current in-memory count of recorded waitlist entries.
+Returns the current count of locally persisted waitlist entries.
 
 ### `POST /api/waitlist`
 
@@ -326,7 +334,7 @@ Not fully. This is an MVP designed to validate structure, messaging, and core in
 
 ### Is waitlist data persistent?
 
-Not yet. The current implementation stores entries in memory for MVP behavior. A database-backed version should be added before production use.
+Yes, locally. The current implementation persists entries to JSON files in the `data/` directory. A database-backed version is still recommended before production use.
 
 ### Why is the build script using webpack?
 
@@ -341,7 +349,7 @@ No. It is intentionally illustrative until final token allocation details are ve
 - The wallet modal is a UI integration layer, not a custody system.
 - Always verify the contract address before launch.
 - Never treat the MVP as financial advice.
-- Persisted admin, waitlist, and analytics systems should be hardened before public release.
+- Local JSON persistence is suitable for MVP use, but production deployments should move config and waitlist storage into managed infrastructure.
 
 ## License
 

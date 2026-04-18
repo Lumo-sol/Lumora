@@ -19,3 +19,4 @@ node_modules
 --width
 swarmbet-screenshot.png
 tsconfig.tsbuildinfo
+data/*.json

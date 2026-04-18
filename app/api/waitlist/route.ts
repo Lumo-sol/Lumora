@@ -1,15 +1,10 @@
 import { NextResponse } from "next/server"
+import { readWaitlistEntries, writeWaitlistEntries, type WaitlistEntry } from "@/lib/server-storage"
 import { isValidEmail } from "@/lib/validators"
 
-interface WaitlistEntry {
-  email: string
-  source: string
-  createdAt: string
-}
-
-const waitlistEntries: WaitlistEntry[] = []
-
 export async function GET() {
+  const waitlistEntries = await readWaitlistEntries()
+
   return NextResponse.json({
     count: waitlistEntries.length,
   })
@@ -17,6 +12,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    const waitlistEntries = await readWaitlistEntries()
     const body = await request.json()
     const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : ""
     const source = typeof body.source === "string" ? body.source.trim() : "landing-page"
@@ -36,11 +32,14 @@ export async function POST(request: Request) {
       })
     }
 
-    waitlistEntries.unshift({
+    const nextEntry: WaitlistEntry = {
       email,
       source,
       createdAt: new Date().toISOString(),
-    })
+    }
+
+    waitlistEntries.unshift(nextEntry)
+    await writeWaitlistEntries(waitlistEntries)
 
     return NextResponse.json({
       success: true,
