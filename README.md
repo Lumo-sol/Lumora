@@ -14,6 +14,7 @@
   <a href="#architecture">Architecture</a> •
   <a href="#official-links">Official Links</a> •
   <a href="#roadmap">Roadmap</a> •
+  <a href="#community-and-support">Community</a> •
   <a href="#installation">Installation</a> •
   <a href="#configuration">Configuration</a> •
   <a href="#faq">FAQ</a>
@@ -114,20 +115,20 @@ public/
   logo.jpg
 ```
 
-### Runtime flow
+## Process Flow
 
 ```mermaid
-flowchart TD
-    A["Visitor opens landing page"] --> B["Next.js app renders MVP modules"]
-    B --> C["Client fetches /api/config"]
-    B --> D["Client fetches /api/prices"]
-    B --> E["Client fetches /api/waitlist"]
-    C --> F["Contract address is displayed and copyable"]
-    D --> G["SOL market context is rendered"]
-    E --> H["Current waitlist count is displayed"]
-    H --> I["Visitor submits waitlist form"]
-    I --> J["POST /api/waitlist validates email"]
-    J --> K["Waitlist response updates UI state"]
+graph TD
+    A[Visitor opens the landing page] --> B[Next.js renders the MVP sections]
+    B --> C[Client requests config data]
+    B --> D[Client requests price data]
+    B --> E[Client requests waitlist count]
+    C --> F[Contract address is shown in the UI]
+    D --> G[SOL market metrics are rendered]
+    E --> H[Waitlist count is shown]
+    H --> I[Visitor submits the waitlist form]
+    I --> J[Waitlist API validates the email]
+    J --> K[UI updates the submission state]
 ```
 
 ## Functional Modules
@@ -170,6 +171,11 @@ The roadmap below starts in April 2025 and reflects a phased MVP-to-launch progr
 | July 2025 | Phase 04 | Expand documentation, FAQ, README quality, and GitHub handoff readiness | In Progress |
 | August 2025 | Phase 05 | Add persistent waitlist storage, analytics, and production-grade launch integrations | Planned |
 | September 2025 | Phase 06 | Replace placeholder tokenomics with verified launch data and legal/policy pages | Planned |
+
+## Community and Support
+
+- Website: [https://www.lumora.cfd](https://www.lumora.cfd)
+- X / Twitter: [https://x.com/Lumora_so](https://x.com/Lumora_so)
 
 ## Installation
 
@@ -339,4 +345,4 @@ No. It is intentionally illustrative until final token allocation details are ve
 
 ## License
 
-No license has been added yet. Add the appropriate license before public distribution.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
