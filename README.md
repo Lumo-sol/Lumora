@@ -163,16 +163,16 @@ graph TD
 
 ## Roadmap
 
-The roadmap below starts in April 2025 and reflects a phased MVP-to-launch progression.
+The roadmap below starts in April 2026 and reflects a phased MVP-to-launch progression.
 
 | Date | Phase | Focus | Status |
 | --- | --- | --- | --- |
-| April 2025 | Phase 01 | Define the SOL token narrative, landing page structure, and first-principles MVP scope | Completed |
-| May 2025 | Phase 02 | Ship the live metrics panel, token utility framing, and ecosystem positioning modules | Completed |
-| June 2025 | Phase 03 | Add contract configuration, waitlist capture, and wallet-ready CTA flows | Completed |
-| July 2025 | Phase 04 | Expand documentation, FAQ, README quality, and GitHub handoff readiness | In Progress |
-| August 2025 | Phase 05 | Add persistent waitlist storage, analytics, and production-grade launch integrations | Planned |
-| September 2025 | Phase 06 | Replace placeholder tokenomics with verified launch data and legal/policy pages | Planned |
+| April 2026 | Phase 01 | Define the SOL token narrative, landing page structure, and first-principles MVP scope | Completed |
+| May 2026 | Phase 02 | Ship the live metrics panel, token utility framing, and ecosystem positioning modules | Completed |
+| June 2026 | Phase 03 | Add contract configuration, waitlist capture, and wallet-ready CTA flows | Completed |
+| July 2026 | Phase 04 | Expand documentation, FAQ, README quality, and GitHub handoff readiness | In Progress |
+| August 2026 | Phase 05 | Add persistent waitlist storage, analytics, and production-grade launch integrations | Planned |
+| September 2026 | Phase 06 | Replace placeholder tokenomics with verified launch data and legal/policy pages | Planned |
 
 ## Community and Support
 
