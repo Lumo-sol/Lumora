@@ -15,7 +15,6 @@
   <a href="#process-flow">Process Flow</a> •
   <a href="#roadmap">Roadmap</a> •
   <a href="#installation">Installation</a> •
-  <a href="#configuration">Configuration</a> •
   <a href="#faq">FAQ</a>
 </p>
 
@@ -45,7 +44,7 @@ The README logo uses the SVG asset through an HTML image tag because GitHub hand
 - Header navigation for Markets, Agents, Create, Rank, Docs, and Portfolio
 - Copyable contract address display using the live `8888...8888` short format
 - Language indicator, notifications, theme toggle, X link, and wallet connection button
-- Live crypto ticker powered by `/api/prices`
+- Live crypto ticker for market context
 - Hero section for the AI-powered prediction market narrative
 - Prediction market grid with categories, YES / NO outcomes, odds, volume, liquidity, and trader counts
 - Sticky live activity panel and bet slip
@@ -55,11 +54,10 @@ The README logo uses the SVG asset through an HTML image tag because GitHub hand
 - Mobile bet slip support
 - Light and dark theme support
 
-### Backend-facing modules
+### Runtime modules
 
-- `/api/config` for contract address delivery and protected admin updates
-- `/api/prices` for market ticker data with fallback-safe static values
-- Local JSON runtime config persistence under `data/`
+- Contract address delivery for the public interface
+- Market ticker data with fallback-safe static values
 - TypeScript validation for Solana address-like values
 
 ## First-Principles MVP Scope
@@ -84,8 +82,7 @@ That is why the current repository prioritizes market browsing, price context, a
 - Tailwind CSS v4
 - Radix UI primitives
 - Lucide icons
-- Local Next.js API routes
-- Local JSON persistence for runtime configuration
+- Lightweight runtime data layer
 
 ### Project structure
 
@@ -93,9 +90,6 @@ That is why the current repository prioritizes market browsing, price context, a
 app/
   layout.tsx
   page.tsx
-  api/
-    config/route.ts
-    prices/route.ts
 components/
   agent-hub.tsx
   bet-modal.tsx
@@ -135,8 +129,8 @@ data/
 flowchart TD
   Visitor["Visitor opens Lumora"]
   App["Next.js renders the market terminal"]
-  Config["GET /api/config"]
-  Prices["GET /api/prices"]
+  Metadata["Public contract metadata loads"]
+  Prices["Market price context loads"]
   Markets["User reviews prediction markets"]
   Agents["AI agents display lifecycle status"]
   Choice["User selects YES or NO"]
@@ -145,11 +139,11 @@ flowchart TD
   Portfolio["Portfolio surface shows user context"]
 
   Visitor --> App
-  App --> Config
+  App --> Metadata
   App --> Prices
   App --> Markets
   App --> Agents
-  Config --> Markets
+  Metadata --> Markets
   Prices --> Markets
   Markets --> Choice
   Choice --> Slip
@@ -188,7 +182,7 @@ flowchart TD
 - Documentation section
 - Security notes
 - Status messaging
-- Config validation
+- Public metadata validation
 - Clear MVP limitations
 
 ## Roadmap
@@ -200,8 +194,8 @@ The roadmap starts in April 2026 and follows the public Prediction Markets produ
 | April 2026 | Phase 01 | Align Git source with the live AI-powered Prediction Markets website | Completed |
 | May 2026 | Phase 02 | Expand market cards, category filters, live activity, and bet slip surfaces | Completed |
 | June 2026 | Phase 03 | Improve agent hub, market creation, leaderboard, docs, and portfolio sections | Completed |
-| July 2026 | Phase 04 | Harden API configuration, pricing fallback behavior, and GitHub handoff readiness | In Progress |
-| August 2026 | Phase 05 | Add production persistence, analytics, monitoring, and launch environment integrations | Planned |
+| July 2026 | Phase 04 | Harden pricing fallback behavior, public runtime behavior, and GitHub handoff readiness | In Progress |
+| August 2026 | Phase 05 | Add production persistence, analytics, monitoring, and launch integrations | Planned |
 | September 2026 | Phase 06 | Add audited on-chain market contracts, policy pages, and production wallet flows | Planned |
 
 ## Community and Support
@@ -240,85 +234,17 @@ npm run typecheck
 npm run build
 ```
 
-The build script uses webpack mode for stronger compatibility in restricted environments.
-
-## Configuration
-
-Copy the example environment file and adjust values as needed:
-
-```bash
-cp .env.example .env.local
-```
-
-Supported variables:
-
-- `ADMIN_PASSWORD`: protects `POST /api/config`
-- `DEFAULT_CONTRACT_ADDRESS`: sets the initial Solana contract address shown in the UI
-
-Important:
-
-- `ADMIN_PASSWORD` is required for write access to `/api/config`.
-- Runtime config is persisted to local JSON under `data/`.
-- Runtime JSON files are local-only artifacts and are ignored by Git.
-
-## API Reference
-
-### `GET /api/config`
-
-Returns the active contract address used by the UI.
-
-Example response:
-
-```json
-{
-  "contractAddress": "88888888888888888888888888888888"
-}
-```
-
-### `POST /api/config`
-
-Updates the contract address when the correct admin password is provided.
-
-Example request:
-
-```json
-{
-  "password": "change-me",
-  "contractAddress": "88888888888888888888888888888888"
-}
-```
-
-### `GET /api/prices`
-
-Returns the token ticker data used by the market context panel.
-
-Example response:
-
-```json
-[
-  {
-    "symbol": "BTC",
-    "name": "Bitcoin",
-    "price": 94250,
-    "change24h": 2.1
-  }
-]
-```
+The build script uses webpack mode for stronger compatibility in restricted systems.
 
 ## Usage
 
 ### Local development workflow
 
 1. Install dependencies.
-2. Add environment variables if needed.
-3. Run the development server.
-4. Verify the homepage modules against the live website structure.
-5. Test contract address copy and wallet modal behavior.
-6. Test market card selection, bet slip display, docs tabs, leaderboard, and portfolio empty state.
-
-### Updating the contract address
-
-Use `POST /api/config` with the admin password, or change `DEFAULT_CONTRACT_ADDRESS` in your environment file.
+2. Run the development server.
+3. Verify the homepage modules against the live website structure.
+4. Test contract address copy and wallet modal behavior.
+5. Test market card selection, bet slip display, docs tabs, leaderboard, and portfolio empty state.
 
 ## Project Status
 
@@ -326,17 +252,17 @@ Use `POST /api/config` with the admin password, or change `DEFAULT_CONTRACT_ADDR
 
 - The source now follows the public Prediction Markets website.
 - Core market, agent, creation, rank, docs, and portfolio surfaces are included.
-- Contract config API is implemented.
-- Pricing API is integrated with fallback-safe values.
+- Contract address display is implemented.
+- Pricing context is integrated with fallback-safe values.
 - Wallet, notification, language indicator, and theme UI surfaces are included.
-- README, license, and environment documentation are included.
+- README, license, and project documentation are included.
 
 ### Planned next steps
 
-- Replace static market examples with live backend data.
+- Replace static market examples with live production data.
 - Connect market actions to audited on-chain contracts.
 - Add production persistence for market, activity, and portfolio data.
-- Add analytics, monitoring, and deployment environment configuration.
+- Add analytics, monitoring, and deployment readiness.
 - Add final policy, terms, privacy, and risk disclosure pages.
 
 ## Project Highlights
@@ -367,7 +293,7 @@ Not fully. This is an MVP-level web application aligned with the public website.
 
 ### Are markets settled on-chain today?
 
-The current repository focuses on the interface and readiness layer. On-chain market execution and settlement should be connected only after contract audits and production backend integrations are complete.
+The current repository focuses on the interface and readiness layer. On-chain market execution and settlement should be connected only after contract audits and production integrations are complete.
 
 ### Why does the project show AI agents?
 
@@ -375,7 +301,7 @@ Agents are central to the Lumora product story. The interface shows how market c
 
 ### Why is the build script using webpack?
 
-Webpack build mode is more reliable than Turbopack in some restricted or sandboxed environments.
+Webpack build mode is more reliable than Turbopack in some restricted or sandboxed systems.
 
 ## Security Notes
 
@@ -383,7 +309,7 @@ Webpack build mode is more reliable than Turbopack in some restricted or sandbox
 - Always verify the contract address before launch.
 - Do not enable real trade execution without audited contracts and production monitoring.
 - Never treat the MVP interface as financial advice.
-- Local JSON persistence is suitable only for MVP runtime configuration. Production deployments should use managed infrastructure.
+- Production deployments should use managed infrastructure for durable market and portfolio data.
 
 ## License
 
