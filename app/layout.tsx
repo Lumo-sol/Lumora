@@ -4,13 +4,13 @@ import { SolanaWalletProvider } from "@/components/wallet-provider"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Lumora | SOL Token MVP",
+  title: "Lumora — AI-Powered Prediction Markets",
   description:
-    "A SOL-native token landing page focused on conviction, utility, ecosystem momentum, and community conversion.",
+    "A prediction market terminal for crypto. Trade binary contracts on price, on-chain metrics, and macro events settled by AI agents.",
   openGraph: {
-    title: "Lumora | SOL Token MVP",
+    title: "Lumora — AI-Powered Prediction Markets",
     description:
-      "Explore the SOL thesis, track market momentum, review utility, and join the Lumora community.",
+      "A prediction market terminal for crypto. Trade binary contracts on price, on-chain metrics, and macro events.",
     type: "website",
   },
 }

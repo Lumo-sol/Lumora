@@ -1,20 +1,19 @@
 <p align="center">
-  <img src="./public/logo.jpg" alt="Lumora logo" width="110" />
+  <img src="./public/icon.svg" alt="Lumora logo" width="112" />
 </p>
 
-<h1 align="center">Lumora SOL Token MVP</h1>
+<h1 align="center">Lumora AI-Powered Prediction Markets</h1>
 
 <p align="center">
-  A SOL-native landing page MVP focused on token narrative, live market context, utility framing, roadmap clarity, and community conversion.
+  A Solana-native prediction market terminal with AI agents, live crypto market context, wallet entry points, rankings, documentation, and portfolio surfaces.
 </p>
 
 <p align="center">
   <a href="#overview">Overview</a> •
   <a href="#features">Features</a> •
   <a href="#architecture">Architecture</a> •
-  <a href="#official-links">Official Links</a> •
+  <a href="#process-flow">Process Flow</a> •
   <a href="#roadmap">Roadmap</a> •
-  <a href="#community-and-support">Community</a> •
   <a href="#installation">Installation</a> •
   <a href="#configuration">Configuration</a> •
   <a href="#faq">FAQ</a>
@@ -22,61 +21,60 @@
 
 ## Overview
 
-Lumora is a product-oriented MVP for a SOL token project. The goal is not to simulate a full token platform on day one. The goal is to ship the smallest set of modules that make the project legible, credible, and actionable.
+Lumora is an AI-powered prediction market interface built around Solana-native trading flows. This repository is aligned with the current public website at [https://www.lumora.cfd](https://www.lumora.cfd), where the product is presented as a fast prediction market terminal rather than a token-only landing page.
 
-This repository focuses on:
-
-- Explaining the token thesis clearly
-- Showing live market context through a lightweight API-backed metrics module
-- Presenting utility and ecosystem fit without overpromising
-- Supporting wallet-facing conversion with a visible contract address and waitlist capture
-- Staying easy to review, extend, and upload to GitHub
+The live product narrative is simple: users browse binary crypto markets, AI agents help create and settle markets, and Solana wallets provide the entry point for trading readiness.
 
 ## Official Links
 
-- X / Twitter: [https://x.com/Lumora_so](https://x.com/Lumora_so)
 - Website: [https://www.lumora.cfd](https://www.lumora.cfd)
+- X / Twitter: [https://x.com/Lumora_so](https://x.com/Lumora_so)
 - GitHub Repository: [https://github.com/Lumo-sol/Lumora.git](https://github.com/Lumo-sol/Lumora.git)
 
-## Brand Image Note
+## Brand Assets
 
-The README uses an HTML `<img>` tag so the project brand image renders more reliably across GitHub viewers.
+The README logo uses the SVG asset through an HTML image tag because GitHub handles SVG rendering more reliably this way than plain Markdown image syntax.
 
-If the preview does not render in a specific client, open the asset directly:
-
-- [`public/logo.jpg`](./public/logo.jpg)
+- Primary SVG logo: [`public/icon.svg`](./public/icon.svg)
+- Raster fallback: [`public/logo.jpg`](./public/logo.jpg)
 
 ## Features
 
-### User-facing MVP modules
+### User-facing modules
 
-- Hero section with SOL token positioning and launch thesis
-- Live metrics section powered by `/api/prices`
-- Token utility and illustrative token allocation section
-- Ecosystem fit and roadmap sections
-- FAQ and project documentation section
-- Community CTA with contract address copy and waitlist form
-- Solana wallet connection modal for Phantom and Solflare
-- Light and dark theme toggle
+- Header navigation for Markets, Agents, Create, Rank, Docs, and Portfolio
+- Copyable contract address display using the live `8888...8888` short format
+- Language indicator, notifications, theme toggle, X link, and wallet connection button
+- Live crypto ticker powered by `/api/prices`
+- Hero section for the AI-powered prediction market narrative
+- Prediction market grid with categories, YES / NO outcomes, odds, volume, liquidity, and trader counts
+- Sticky live activity panel and bet slip
+- AI Agent Hub showing market creation, data oracle, and settlement engine agents
+- Natural-language market creation surface with an agent pipeline preview
+- Leaderboard, documentation, and portfolio sections
+- Mobile bet slip support
+- Light and dark theme support
 
-### Backend-facing MVP modules
+### Backend-facing modules
 
-- `/api/config` for contract address delivery and lightweight admin updates
-- `/api/prices` for market context and fallback-safe token pricing
-- `/api/waitlist` for validated MVP waitlist submissions with local persistence
+- `/api/config` for contract address delivery and protected admin updates
+- `/api/prices` for market ticker data with fallback-safe static values
+- Local JSON runtime config persistence under `data/`
+- TypeScript validation for Solana address-like values
 
 ## First-Principles MVP Scope
 
-This project follows a first-principles MVP model:
+The MVP is built from the smallest set of behaviors needed for a prediction market product to make sense:
 
-1. A token site must explain why the token exists.
-2. It must connect the story to live market context.
-3. It must make next actions obvious.
-4. It should not pretend unfinished systems are already production-ready.
+1. Users must immediately understand the market question.
+2. Users must see both outcomes, current odds, volume, and liquidity context.
+3. Users must know where wallet actions begin before any real value flow is enabled.
+4. Users must understand how AI agents participate in creation, pricing, and settlement.
+5. The product must avoid overstating production readiness before audited on-chain integrations exist.
 
-That is why the repository includes narrative, metrics, validation, configuration, and waitlist capture before more complex launch mechanics.
+That is why the current repository prioritizes market browsing, price context, agent visibility, wallet entry, docs, leaderboard, and portfolio surfaces before deeper trade execution.
 
-## Technical Architecture
+## Architecture
 
 ### Stack
 
@@ -85,7 +83,9 @@ That is why the repository includes narrative, metrics, validation, configuratio
 - TypeScript
 - Tailwind CSS v4
 - Radix UI primitives
-- Local API routes for config, pricing, and waitlist handling
+- Lucide icons
+- Local Next.js API routes
+- Local JSON persistence for runtime configuration
 
 ### Project structure
 
@@ -96,23 +96,35 @@ app/
   api/
     config/route.ts
     prices/route.ts
-    waitlist/route.ts
 components/
+  agent-hub.tsx
+  bet-modal.tsx
+  create-market.tsx
+  docs-section.tsx
+  footer.tsx
   header.tsx
   hero-section.tsx
-  live-metrics.tsx
-  token-utility.tsx
-  ecosystem-section.tsx
-  roadmap-section.tsx
-  faq-section.tsx
-  docs-section.tsx
-  community-cta.tsx
+  language-toggle.tsx
+  market-card.tsx
+  mobile-bet-slip.tsx
+  notification-center.tsx
+  portfolio-section.tsx
+  prediction-markets.tsx
+  price-ticker.tsx
+  rank-section.tsx
+  sticky-sidebar.tsx
+  theme-provider.tsx
+  theme-toggle.tsx
+  wallet-button.tsx
   wallet-provider.tsx
 lib/
+  server-storage.ts
+  utils.ts
   validators.ts
 public/
   icon.svg
   logo.jpg
+  wallets/
 data/
   .gitkeep
 ```
@@ -120,59 +132,77 @@ data/
 ## Process Flow
 
 ```mermaid
-graph TD
-    A[Visitor opens the landing page] --> B[Next.js renders the MVP sections]
-    B --> C[Client requests config data]
-    B --> D[Client requests price data]
-    B --> E[Client requests waitlist count]
-    C --> F[Contract address is shown in the UI]
-    D --> G[SOL market metrics are rendered]
-    E --> H[Waitlist count is shown]
-    H --> I[Visitor submits the waitlist form]
-    I --> J[Waitlist API validates the email]
-    J --> K[UI updates the submission state]
+flowchart TD
+  Visitor["Visitor opens Lumora"]
+  App["Next.js renders the market terminal"]
+  Config["GET /api/config"]
+  Prices["GET /api/prices"]
+  Markets["User reviews prediction markets"]
+  Agents["AI agents display lifecycle status"]
+  Choice["User selects YES or NO"]
+  Slip["Bet slip prepares stake and return"]
+  Wallet["Wallet connection handles signing readiness"]
+  Portfolio["Portfolio surface shows user context"]
+
+  Visitor --> App
+  App --> Config
+  App --> Prices
+  App --> Markets
+  App --> Agents
+  Config --> Markets
+  Prices --> Markets
+  Markets --> Choice
+  Choice --> Slip
+  Slip --> Wallet
+  Wallet --> Portfolio
 ```
 
 ## Functional Modules
 
-### 1. Narrative layer
+### Market layer
 
-- Hero section
-- Value proposition blocks
-- Token utility framing
-- Ecosystem fit explanation
+- Price ticker
+- Market categories
+- Market cards
+- YES / NO odds display
+- Volume, liquidity, and trader signals
 
-### 2. Market context layer
+### Agent layer
 
-- SOL and peer asset pricing
-- Fallback-safe pricing API
-- Lightweight signal cards
+- Market Creator
+- Data Oracle
+- Settlement Engine
+- Agent pipeline preview
+- Agent performance metrics
 
-### 3. Conversion layer
+### Trading readiness layer
 
-- Copyable contract address
-- Wallet connect button
-- Waitlist API submission loop
+- Wallet connection modal
+- Bet modal
+- Mobile bet slip
+- Contract address copy action
+- Portfolio section
 
-### 4. Trust layer
+### Trust layer
 
-- FAQ
-- Project docs
-- Basic config validation
-- Input validation utilities
+- Documentation section
+- Security notes
+- Status messaging
+- Config validation
+- Clear MVP limitations
 
 ## Roadmap
 
-The roadmap below starts in April 2026 and reflects a phased MVP-to-launch progression.
+The roadmap starts in April 2026 and follows the public Prediction Markets product direction.
 
 | Date | Phase | Focus | Status |
 | --- | --- | --- | --- |
-| April 2026 | Phase 01 | Define the SOL token narrative, landing page structure, and first-principles MVP scope | Completed |
-| May 2026 | Phase 02 | Ship the live metrics panel, token utility framing, and ecosystem positioning modules | Completed |
-| June 2026 | Phase 03 | Add contract configuration, waitlist capture, and wallet-ready CTA flows | Completed |
-| July 2026 | Phase 04 | Expand documentation, FAQ, README quality, and GitHub handoff readiness | In Progress |
-| August 2026 | Phase 05 | Add persistent waitlist storage, analytics, and production-grade launch integrations | Planned |
-| September 2026 | Phase 06 | Replace placeholder tokenomics with verified launch data and legal/policy pages | Planned |
+| April 2026 | Phase 01 | Align Git source with the live AI-powered Prediction Markets website | Completed |
+| May 2026 | Phase 02 | Expand market cards, category filters, live activity, and bet slip surfaces | Completed |
+| June 2026 | Phase 03 | Improve agent hub, market creation, leaderboard, docs, and portfolio sections | Completed |
+| July 2026 | Phase 04 | Harden API configuration, pricing fallback behavior, and GitHub handoff readiness | In Progress |
+| August 2026 | Phase 05 | Add production persistence, analytics, monitoring, and launch environment integrations | Planned |
+| September 2026 | Phase 06 | Add audited on-chain market contracts, policy pages, and production wallet flows | Planned |
 
 ## Community and Support
 
@@ -184,7 +214,7 @@ The roadmap below starts in April 2026 and reflects a phased MVP-to-launch progr
 ### Requirements
 
 - Node.js 20+
-- npm 10+ or compatible package manager
+- npm 10+ or a compatible package manager
 
 ### Install dependencies
 
@@ -222,16 +252,14 @@ cp .env.example .env.local
 
 Supported variables:
 
-- `ADMIN_PASSWORD`
-  Protects `POST /api/config`
-- `DEFAULT_CONTRACT_ADDRESS`
-  Sets the initial Solana contract address shown in the UI
+- `ADMIN_PASSWORD`: protects `POST /api/config`
+- `DEFAULT_CONTRACT_ADDRESS`: sets the initial Solana contract address shown in the UI
 
 Important:
 
-- `ADMIN_PASSWORD` is required for write access to `/api/config`
-- Runtime config and waitlist data are persisted to local JSON files under `data/`
-- Runtime JSON files are local-only artifacts and are ignored by git
+- `ADMIN_PASSWORD` is required for write access to `/api/config`.
+- Runtime config is persisted to local JSON under `data/`.
+- Runtime JSON files are local-only artifacts and are ignored by Git.
 
 ## API Reference
 
@@ -243,7 +271,7 @@ Example response:
 
 ```json
 {
-  "contractAddress": "So11111111111111111111111111111111111111112"
+  "contractAddress": "88888888888888888888888888888888"
 }
 ```
 
@@ -256,29 +284,25 @@ Example request:
 ```json
 {
   "password": "change-me",
-  "contractAddress": "So11111111111111111111111111111111111111112"
+  "contractAddress": "88888888888888888888888888888888"
 }
 ```
 
 ### `GET /api/prices`
 
-Returns the token panel data used by the metrics section.
+Returns the token ticker data used by the market context panel.
 
-### `GET /api/waitlist`
-
-Returns the current count of locally persisted waitlist entries.
-
-### `POST /api/waitlist`
-
-Accepts validated waitlist submissions.
-
-Example request:
+Example response:
 
 ```json
-{
-  "email": "founder@project.com",
-  "source": "community-cta"
-}
+[
+  {
+    "symbol": "BTC",
+    "name": "Bitcoin",
+    "price": 94250,
+    "change24h": 2.1
+  }
+]
 ```
 
 ## Usage
@@ -288,9 +312,9 @@ Example request:
 1. Install dependencies.
 2. Add environment variables if needed.
 3. Run the development server.
-4. Verify the homepage modules.
-5. Test the waitlist submission flow.
-6. Test the wallet modal and contract address copy action.
+4. Verify the homepage modules against the live website structure.
+5. Test contract address copy and wallet modal behavior.
+6. Test market card selection, bet slip display, docs tabs, leaderboard, and portfolio empty state.
 
 ### Updating the contract address
 
@@ -300,56 +324,66 @@ Use `POST /api/config` with the admin password, or change `DEFAULT_CONTRACT_ADDR
 
 ### Current status
 
-- Core landing page MVP is shipped
-- Waitlist API is implemented
-- Contract config API is implemented
-- Live pricing module is integrated
-- README and environment documentation are included
+- The source now follows the public Prediction Markets website.
+- Core market, agent, creation, rank, docs, and portfolio surfaces are included.
+- Contract config API is implemented.
+- Pricing API is integrated with fallback-safe values.
+- Wallet, notification, language indicator, and theme UI surfaces are included.
+- README, license, and environment documentation are included.
 
 ### Planned next steps
 
-- Persist waitlist data to a database or hosted backend
-- Replace illustrative tokenomics with verified launch data
-- Add analytics and event tracking
-- Add wallet-aware gated actions
-- Add token launch links and legal pages
+- Replace static market examples with live backend data.
+- Connect market actions to audited on-chain contracts.
+- Add production persistence for market, activity, and portfolio data.
+- Add analytics, monitoring, and deployment environment configuration.
+- Add final policy, terms, privacy, and risk disclosure pages.
 
 ## Project Highlights
 
-- Minimal but functional launch-ready structure
-- Clean English-only codebase and documentation
-- Consistent brand image support in README
-- Lightweight API layer for MVP realism
-- Easy GitHub handoff and extension path
+- Git source is aligned with the current public website direction.
+- The UI presents the complete prediction market product loop before trade execution is enabled.
+- AI agent infrastructure is visible and understandable to new users.
+- The codebase keeps comments, identifiers, and documentation in English.
+- The project remains easy to deploy, audit, and extend.
+
+## Quality Checklist
+
+- TypeScript checks should pass with `npm run typecheck`.
+- Production build should pass with `npm run build`.
+- No blank source files should exist outside generated directories.
+- User-facing source code and comments should remain English-only.
+- Community links should only include official Lumora channels that currently exist.
 
 ## Blank File Audit
 
-The repository was checked for blank project files outside `node_modules` and `.next`. No empty source files were found during the latest audit.
+The repository should be checked for blank project files outside `node_modules` and `.next` before each release. No empty source files are expected in the tracked project tree.
 
 ## FAQ
 
 ### Is this production-ready?
 
-Not fully. This is an MVP designed to validate structure, messaging, and core interaction loops.
+Not fully. This is an MVP-level web application aligned with the public website. It is suitable for presentation, GitHub handoff, and product iteration, but audited on-chain trade execution is still a planned step.
 
-### Is waitlist data persistent?
+### Are markets settled on-chain today?
 
-Yes, locally. The current implementation persists entries to JSON files in the `data/` directory. A database-backed version is still recommended before production use.
+The current repository focuses on the interface and readiness layer. On-chain market execution and settlement should be connected only after contract audits and production backend integrations are complete.
+
+### Why does the project show AI agents?
+
+Agents are central to the Lumora product story. The interface shows how market creation, data validation, odds updates, and settlement can be represented to users in a clear lifecycle.
 
 ### Why is the build script using webpack?
 
 Webpack build mode is more reliable than Turbopack in some restricted or sandboxed environments.
 
-### Is the tokenomics section final?
-
-No. It is intentionally illustrative until final token allocation details are verified.
-
 ## Security Notes
 
 - The wallet modal is a UI integration layer, not a custody system.
 - Always verify the contract address before launch.
-- Never treat the MVP as financial advice.
-- Local JSON persistence is suitable for MVP use, but production deployments should move config and waitlist storage into managed infrastructure.
+- Do not enable real trade execution without audited contracts and production monitoring.
+- Never treat the MVP interface as financial advice.
+- Local JSON persistence is suitable only for MVP runtime configuration. Production deployments should use managed infrastructure.
 
 ## License
 

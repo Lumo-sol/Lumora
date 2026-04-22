@@ -1,6 +1,6 @@
 {
-  "name": "lumora-sol-mvp",
-  "version": "0.1.0",
+  "name": "lumora-prediction-markets",
+  "version": "0.8.2-beta.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
